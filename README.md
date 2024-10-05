@@ -1,6 +1,6 @@
 # Bytecode Compiler
 
-A simple compiler that reads assembly instructions and 'in'/'out' arrays, then outputs the bytecode and array contents.
+A simple compiler that reads assembly instructions and 'in'/'out' arrays, then outputs the generated llvm code
 
 ## Installation
 

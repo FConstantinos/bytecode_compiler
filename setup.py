@@ -6,7 +6,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'bytecode-compiler=bytecode_compiler.compiler:main',
+            'bytecode-compiler=bytecode_compiler.cli:main',
         ],
     },
 )
