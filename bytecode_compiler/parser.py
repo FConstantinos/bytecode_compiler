@@ -8,11 +8,15 @@ cmd2opcode = {
     "DUP": (0x06, False)
 }
 
-max_stack_size = 256
+max_array_size = 256 # Number of values of the maximum index operand which is a single byte
 word_size = 256 # 32 bytes
 
 # Parse the assembly commands into bytecode
 def parse_assembly(assembly):
+    # Check there is only a signle STOP command
+    if assembly.count("STOP") != 1:
+        raise ValueError("There must be exactly one STOP command")
+    
     bytecode = []
     for line_num, line in enumerate(assembly.splitlines(), 1):
         line = line.strip()
@@ -31,8 +35,8 @@ def parse_assembly(assembly):
                 arg = int(parts[1])
             except ValueError:
                 raise ValueError(f"Invalid argument '{parts[1]}' for command '{cmd}' on line {line_num}")
-            if arg < 0 or arg >= max_stack_size:
-                raise ValueError(f"Argument {arg} on line {line_num} must be between 0 and {max_stack_size - 1}")
+            if arg < 0 or arg >= max_array_size:
+                raise ValueError(f"Argument {arg} on line {line_num} must be between 0 and {max_array_size - 1}")
             bytecode[-1].append(arg)
         else:
             if len(parts) != 1:
